@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://casuq5kyqnbwt"]
+[gd_scene load_steps=12 format=3 uid="uid://casuq5kyqnbwt"]
 
 [ext_resource type="PackedScene" uid="uid://dtwnv0burnere" path="res://scenes/entities/player/player.tscn" id="1_377w7"]
 [ext_resource type="PackedScene" uid="uid://dtygr1vsius3n" path="res://scenes/entities/enemies/boss.tscn" id="2_bovvr"]
@@ -20,8 +20,17 @@ sky = SubResource("Sky_377w7")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2cq8"]
+albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_bovvr"]
 size = Vector3(80, 0.5, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb4v1"]
+albedo_color = Color(0.515625, 0.515625, 0.515625, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urvlt"]
+albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_377w7"]
 size = Vector3(10, 10, 1)
@@ -53,8 +62,31 @@ collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/Floor"]
 size = Vector3(80, 0.5, 80)
+material = SubResource("StandardMaterial3D_b2cq8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("BoxShape3D_bovvr")
+
+[node name="Floor2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 15.47, 94.185)
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Floor2"]
+size = Vector3(80, 0.5, 80)
+material = SubResource("StandardMaterial3D_xb4v1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor2"]
+shape = SubResource("BoxShape3D_bovvr")
+
+[node name="Floor3" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(0.5, 0, 0, 0, 0.456167, 0.204723, 0, -0.204723, 0.456167, 0, 7.29375, 55.9822)
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Floor3"]
+size = Vector3(80, 0.5, 80)
+material = SubResource("StandardMaterial3D_urvlt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor3"]
 shape = SubResource("BoxShape3D_bovvr")
 
 [node name="Wall" type="StaticBody3D" parent="Environment"]
