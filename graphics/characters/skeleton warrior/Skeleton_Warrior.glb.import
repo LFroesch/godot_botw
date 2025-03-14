@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bks0ynvp57mq1"
-path="res://.godot/imported/Skeleton_Warrior.glb-32438ac83738daf50b0cab54bf259727.scn"
+path="res://.godot/imported/Skeleton_Warrior.glb-0dfdff61dbd014345de6f62081b45983.scn"
 
 [deps]
 
-source_file="res://audio/Skeleton_Warrior.glb"
-dest_files=["res://.godot/imported/Skeleton_Warrior.glb-32438ac83738daf50b0cab54bf259727.scn"]
+source_file="res://graphics/characters/skeleton warrior/Skeleton_Warrior.glb"
+dest_files=["res://.godot/imported/Skeleton_Warrior.glb-0dfdff61dbd014345de6f62081b45983.scn"]
 
 [params]
 
@@ -1837,7 +1837,7 @@ _subresources={
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
-"settings/loop_mode": 0,
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -3636,7 +3636,7 @@ _subresources={
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
-"settings/loop_mode": 0,
+"settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",

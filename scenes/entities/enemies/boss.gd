@@ -5,7 +5,7 @@ const simple_attacks = {
 	'spin': "2H_Melee_Attack_Spin",
 	'range': "1H_Melee_Attack_Stab"
 }
-@export var spin_speed = 6
+@export var spin_speed = 4
 var spinning := false
 
 func _physics_process(delta: float) -> void:
@@ -59,7 +59,7 @@ func range_attack_animation() -> void:
 	$AnimationTree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
+func _on_area_3d_body_entered(_body: Node3D) -> void:
 	if spinning:
 		await get_tree().create_timer(rng.randf_range(1.0, 2.0)).timeout
 		var tween = create_tween()
