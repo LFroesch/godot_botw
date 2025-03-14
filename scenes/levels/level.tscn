@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://casuq5kyqnbwt"]
+
+[ext_resource type="PackedScene" uid="uid://dtwnv0burnere" path="res://scenes/entities/player/player.tscn" id="1_377w7"]
+[ext_resource type="PackedScene" uid="uid://dtygr1vsius3n" path="res://scenes/entities/enemies/boss.tscn" id="2_bovvr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ftxyw"]
+sky_top_color = Color(0.756365, 0.9477, 0.988203, 1)
+sky_horizon_color = Color(0.736258, 0.848651, 0.901481, 1)
+ground_bottom_color = Color(0.185491, 0.170795, 0.169581, 1)
+ground_horizon_color = Color(0.736258, 0.848651, 0.901481, 1)
+energy_multiplier = 0.9
+
+[sub_resource type="Sky" id="Sky_377w7"]
+sky_material = SubResource("ProceduralSkyMaterial_ftxyw")
+
+[sub_resource type="Environment" id="Environment_bovvr"]
+background_mode = 2
+sky = SubResource("Sky_377w7")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bovvr"]
+size = Vector3(80, 0.5, 80)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_377w7"]
+size = Vector3(10, 10, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bovvr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_377w7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6682, 0.25, 15.2371)
+
+[node name="Boss" parent="Entities" instance=ExtResource("2_bovvr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7509, 0.216445, -18.4152)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Floor"]
+size = Vector3(80, 0.5, 80)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("BoxShape3D_bovvr")
+
+[node name="Wall" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.61996)
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Wall"]
+size = Vector3(10, 10, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
+shape = SubResource("BoxShape3D_377w7")
+
+[node name="Steps" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41, 4.65)
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Steps"]
+size = Vector3(10, 10, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Steps"]
+shape = SubResource("BoxShape3D_377w7")
+
+[node name="Steps2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.865, 5.665)
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Steps2"]
+size = Vector3(10, 10, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Steps2"]
+shape = SubResource("BoxShape3D_377w7")
