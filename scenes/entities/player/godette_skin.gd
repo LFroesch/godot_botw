@@ -37,10 +37,10 @@ func _defend_change(value: float) -> void:
 
 func switch_weapon(weapon_active: bool) -> void:
 	if weapon_active:
-		$Rig/Skeleton3D/RightHandSlot/sword_1handed2.show()
+		$Rig/Skeleton3D/RightHandSlot/sword.show()
 		$Rig/Skeleton3D/RightHandSlot/wand2.hide()
 	else:
-		$Rig/Skeleton3D/RightHandSlot/sword_1handed2.hide()
+		$Rig/Skeleton3D/RightHandSlot/sword.hide()
 		$Rig/Skeleton3D/RightHandSlot/wand2.show()
 
 func cast_spell() -> void:
@@ -48,6 +48,9 @@ func cast_spell() -> void:
 		extra_animation.animation = "Spellcast_Shoot"
 
 		$AnimationTree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+func shoot_magic() -> void:
+	get_parent().shoot_magic($Rig/Skeleton3D/RightHandSlot/wand2/wand/Marker3D.global_position)
 
 func hit() -> void:
 	extra_animation.animation = "Hit_A"
@@ -63,3 +66,6 @@ func _on_blink_timer_timeout() -> void:
 	await get_tree().create_timer(0.2).timeout
 	change_face('default')
 	$BlinkTimer.wait_time = rng.randf_range(2.0, 5.0)
+
+func can_damage(value: bool):
+	$Rig/Skeleton3D/RightHandSlot/sword.can_damage = value

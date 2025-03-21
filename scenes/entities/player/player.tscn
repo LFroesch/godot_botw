@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtwnv0burnere"]
+[gd_scene load_steps=6 format=3 uid="uid://dtwnv0burnere"]
 
 [ext_resource type="Script" uid="uid://c7441eubpgrqh" path="res://scenes/entities/player/player.gd" id="1_1hmtu"]
 [ext_resource type="PackedScene" uid="uid://crw2brmuovf2g" path="res://scenes/entities/player/camera_controller.tscn" id="2_635qg"]
 [ext_resource type="PackedScene" uid="uid://b7jnlhave6pot" path="res://scenes/entities/player/godette_skin.tscn" id="3_58kc7"]
+[ext_resource type="PackedScene" uid="uid://qswf623t3dl2" path="res://scenes/entities/player/ui.tscn" id="4_nh4ur"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1hmtu"]
 
@@ -22,3 +23,22 @@ min_limit_x = -0.8
 max_limit_x = -0.2
 
 [node name="GodetteSkin" parent="." instance=ExtResource("3_58kc7")]
+
+[node name="UI" parent="." instance=ExtResource("4_nh4ur")]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvulnTimer" type="Timer" parent="Timers"]
+wait_time = 0.8
+one_shot = true
+
+[node name="EnergyRecoveryTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+autostart = true
+
+[node name="StaminaRecoveryTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+autostart = true
+
+[connection signal="timeout" from="Timers/EnergyRecoveryTimer" to="." method="_on_energy_recovery_timer_timeout"]
+[connection signal="timeout" from="Timers/StaminaRecoveryTimer" to="." method="_on_stamina_recovery_timer_timeout"]

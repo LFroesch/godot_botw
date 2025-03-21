@@ -26,10 +26,6 @@ folder_colors={
 "res://scenes/": "green"
 }
 
-[filesystem]
-
-import/blender/enabled=false
-
 [input]
 
 ui_accept={

@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfjl3me7le7ew"]
+
+[ext_resource type="PackedScene" uid="uid://casuq5kyqnbwt" path="res://scenes/levels/level.tscn" id="1_fl1qg"]
+[ext_resource type="PackedScene" uid="uid://dei3k505mtc41" path="res://scenes/levels/overworld_skin.tscn" id="2_l7h5l"]
+[ext_resource type="PackedScene" uid="uid://defd80nyuanxo" path="res://graphics/environment/objects/barrel.glb" id="2_tbicr"]
+[ext_resource type="PackedScene" uid="uid://wmbsoi1t5ylt" path="res://scenes/entities/enemies/skeleton_mage.tscn" id="2_uhu12"]
+[ext_resource type="PackedScene" uid="uid://ddsvnkbeyypbu" path="res://graphics/environment/objects/tree2.glb" id="3_c3d33"]
+[ext_resource type="PackedScene" uid="uid://1dqpuol41mwr" path="res://scenes/levels/bridge.tscn" id="5_ftdat"]
+[ext_resource type="PackedScene" uid="uid://cha1fejd104yc" path="res://scenes/levels/castle.tscn" id="6_id15u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3d33"]
+albedo_color = Color(0.165527, 0.47934, 0.882813, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ftdat"]
+material = SubResource("StandardMaterial3D_c3d33")
+size = Vector2(600, 250)
+
+[node name="Overworld" instance=ExtResource("1_fl1qg")]
+
+[node name="Player" parent="Entities" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6682, -40.2575, 211.91)
+
+[node name="SkeletonMage" parent="Entities" index="1" instance=ExtResource("2_uhu12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -34.8897, 158.828)
+
+[node name="overworld_environment" parent="Environment" index="0" instance=ExtResource("2_l7h5l")]
+
+[node name="barrel" parent="Environment" index="1" instance=ExtResource("2_tbicr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.38706, 12.6282, -78.5014)
+
+[node name="barrel2" parent="Environment" index="2" instance=ExtResource("2_tbicr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80828, 12.6916, -75.5541)
+
+[node name="tree2" parent="Environment" index="3" instance=ExtResource("3_c3d33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0605, 13.0499, -76.7464)
+
+[node name="tree3" parent="Environment" index="4" instance=ExtResource("3_c3d33")]
+transform = Transform3D(0.909447, 0, -0.415821, 0, 1, 0, 0.415821, 0, 0.909447, 4.25286, 13.0499, -76.7464)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50.571, 242.642)
+mesh = SubResource("PlaneMesh_ftdat")
+
+[node name="bridge" parent="." index="5" instance=ExtResource("5_ftdat")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -47, -49, 267)
+
+[node name="castle" parent="." index="6" instance=ExtResource("6_id15u")]
+transform = Transform3D(-0.984995, 0, 0.172582, 0, 1, 0, -0.172582, 0, -0.984995, 57.6536, -40.535, 193.652)
