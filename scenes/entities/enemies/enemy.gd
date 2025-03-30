@@ -26,7 +26,14 @@ var squash_and_stretch := 1.0:
 		var negative = 1.0 + (1.0 - squash_and_stretch)
 		skin.scale = Vector3(negative, squash_and_stretch, negative)
 
+# Add this property to your Enemy base class
+@export var gravity_force := 9.8
+
 func move_to_player(delta):
+	# Apply gravity if not on floor
+	if not is_on_floor():
+		velocity.y -= gravity_force * delta
+	
 	# if you enter range
 	if position.distance_to(player.position) < notice_radius:
 		var target_dir = (player.position - position).normalized()
@@ -34,16 +41,21 @@ func move_to_player(delta):
 		var target_angle = -target_vec2.angle() + PI/2
 		rotation.y = rotate_toward(rotation.y, target_angle, delta * 1.0)
 		if position.distance_to(player.position) > attack_radius:
-			velocity = Vector3(target_vec2.x, 0, target_vec2.y) * speed * speed_modifier
+			# Keep only the x and z components
+			velocity.x = target_vec2.x * speed * speed_modifier
+			velocity.z = target_vec2.y * speed * speed_modifier
 			move_state_machine.travel("walk")
 		else:
-			velocity = Vector3.ZERO
+			velocity.x = 0
+			velocity.z = 0
 			move_state_machine.travel("idle")
 		move_and_slide()
 	# if you leave the range
 	else:
-		velocity = Vector3.ZERO
+		velocity.x = 0
+		velocity.z = 0
 		move_state_machine.travel("idle")
+		move_and_slide()
 
 func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()

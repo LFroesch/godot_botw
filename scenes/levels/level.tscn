@@ -1,33 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://casuq5kyqnbwt"]
+[gd_scene load_steps=3 format=3 uid="uid://casuq5kyqnbwt"]
 
 [ext_resource type="PackedScene" uid="uid://dtwnv0burnere" path="res://scenes/entities/player/player.tscn" id="1_377w7"]
 [ext_resource type="Script" uid="uid://dxk78vyenwoip" path="res://scenes/levels/level.gd" id="1_urvlt"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ftxyw"]
-sky_top_color = Color(0.756365, 0.9477, 0.988203, 1)
-sky_horizon_color = Color(0.736258, 0.848651, 0.901481, 1)
-ground_bottom_color = Color(0.185491, 0.170795, 0.169581, 1)
-ground_horizon_color = Color(0.736258, 0.848651, 0.901481, 1)
-energy_multiplier = 0.9
-
-[sub_resource type="Sky" id="Sky_377w7"]
-sky_material = SubResource("ProceduralSkyMaterial_ftxyw")
-
-[sub_resource type="Environment" id="Environment_bovvr"]
-background_mode = 2
-sky = SubResource("Sky_377w7")
-tonemap_mode = 2
-glow_enabled = true
-
 [node name="Level" type="Node3D"]
 script = ExtResource("1_urvlt")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bovvr")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
 
 [node name="Entities" type="Node3D" parent="."]
 

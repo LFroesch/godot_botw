@@ -20,4 +20,7 @@ material = SubResource("StandardMaterial3D_y0ij2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_d8xov")
 
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -10, 0)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

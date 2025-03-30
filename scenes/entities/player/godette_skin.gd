@@ -1,3 +1,4 @@
+#godette_skin.gd (players skin rig)
 extends Node3D
 
 @onready var move_state_machine = $AnimationTree.get("parameters/MoveStateMachine/playback")

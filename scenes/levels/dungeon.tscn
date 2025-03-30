@@ -1,0 +1,125 @@
+[gd_scene load_steps=14 format=3 uid="uid://dljhslrsm8hyp"]
+
+[ext_resource type="PackedScene" uid="uid://casuq5kyqnbwt" path="res://scenes/levels/level.tscn" id="1_wail4"]
+[ext_resource type="MeshLibrary" uid="uid://cgs3jwaqkxd0j" path="res://graphics/environment/dungeon/dungeon_col.tres" id="2_srduu"]
+[ext_resource type="PackedScene" uid="uid://b3gvqo445vopj" path="res://graphics/environment/dungeon objects/stairs.glb" id="3_pbld3"]
+[ext_resource type="PackedScene" uid="uid://bhqt5vgwxv68w" path="res://graphics/environment/dungeon objects/pillar.glb" id="4_wyxho"]
+[ext_resource type="PackedScene" uid="uid://ben46777uu8eu" path="res://graphics/environment/dungeon objects/table.glb" id="5_q0ye3"]
+[ext_resource type="PackedScene" uid="uid://chw0pqeh5pgfm" path="res://graphics/environment/dungeon objects/stool.glb" id="6_06kf8"]
+[ext_resource type="PackedScene" uid="uid://b7wf3jucxaf1v" path="res://graphics/environment/dungeon objects/torch.glb" id="7_c7dwr"]
+[ext_resource type="PackedScene" uid="uid://dtygr1vsius3n" path="res://scenes/entities/enemies/boss.tscn" id="8_wyxho"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wyxho"]
+sky_top_color = Color(0.210154, 0.674419, 0.886954, 1)
+sky_horizon_color = Color(0.736258, 0.848651, 0.901481, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.736258, 0.848651, 0.901481, 1)
+
+[sub_resource type="Sky" id="Sky_q0ye3"]
+sky_material = SubResource("ProceduralSkyMaterial_wyxho")
+
+[sub_resource type="Environment" id="Environment_06kf8"]
+background_mode = 2
+sky = SubResource("Sky_q0ye3")
+ambient_light_source = 2
+ambient_light_color = Color(0.780392, 0.780392, 0.780392, 1)
+tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.002
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbld3"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wyxho"]
+material = SubResource("StandardMaterial3D_pbld3")
+size = Vector3(4.58, 0.15, 5.495)
+
+[node name="Level" instance=ExtResource("1_wail4")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_06kf8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.4, 0.4, 0.4, 1)
+shadow_enabled = true
+
+[node name="Boss" parent="Entities" index="0" instance=ExtResource("8_wyxho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.0454, 1.12684, 18.3907)
+
+[node name="Player" parent="Entities" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3318, 1.02, 0.2371)
+
+[node name="FloorGrid" type="GridMap" parent="Environment" index="0"]
+mesh_library = ExtResource("2_srduu")
+cell_size = Vector3(4, 2, 4)
+data = {
+"cells": PackedInt32Array(65534, 65534, 1441793, 65535, 65534, 1441793, 0, 65534, 1441793, 1, 65534, 1441793, 1, 65535, 1441793, 1, 0, 1441793, 1, 1, 1441793, 0, 1, 1441793, 65535, 1, 1441793, 65534, 1, 1441793, 65534, 0, 655360, 65534, 65535, 655360, 65535, 65535, 655360, 0, 65535, 655360, 0, 0, 655360, 65535, 0, 655360, 65534, 65533, 1441793, 65535, 65533, 1441793, 0, 65533, 1441793, 1, 65533, 1441793, 2, 65533, 1441793, 2, 65534, 1441793, 2, 65535, 1441793, 2, 0, 1441793, 2, 1, 1441793, 2, 2, 1441793, 1, 2, 1441793, 0, 2, 1441793, 65535, 2, 1441793, 65534, 2, 1441793, 65533, 65535, 655360, 65532, 65535, 655360, 65530, 65535, 655360, 65533, 0, 655360, 65532, 0, 655360, 65530, 0, 655360, 65533, 65533, 655361, 65532, 65533, 655361, 65530, 65533, 655361, 65529, 65533, 655361, 65528, 65533, 655361, 65527, 65533, 655361, 65526, 65533, 655361, 65533, 65534, 655361, 65532, 65534, 655361, 65530, 65534, 655361, 65529, 65534, 655361, 65528, 65534, 655361, 65527, 65534, 655361, 65526, 65534, 655361, 65525, 65534, 655361, 65533, 1, 655361, 65532, 1, 655361, 65530, 1, 655361, 65529, 1, 655361, 65528, 1, 655361, 65527, 1, 655361, 65526, 1, 655361, 65525, 1, 655361, 65525, 65533, 655361, 65524, 65533, 655361, 65533, 2, 655361, 65532, 2, 655361, 65530, 2, 655361, 65529, 2, 655361, 65528, 2, 655361, 65527, 2, 655361, 65526, 2, 655361, 65525, 2, 655361, 65524, 2, 655361, 65524, 65534, 655360, 65524, 65535, 655360, 65525, 65535, 655360, 65526, 65535, 655360, 65527, 65535, 655360, 65528, 65535, 655360, 65529, 65535, 655360, 65529, 0, 655360, 65528, 0, 655360, 65527, 0, 655360, 65526, 0, 655360, 65525, 0, 655360, 65524, 0, 655360, 65524, 1, 655360, 65523, 65534, 655360, 65523, 65535, 655360, 65523, 0, 655360, 65522, 0, 655360, 65522, 1, 655360, 65523, 1, 655360, 65521, 1, 655360, 65521, 0, 655360, 65521, 65535, 655360, 65521, 65534, 655360, 65522, 65534, 655360, 65522, 65535, 655360, 65520, 1, 655360, 65520, 0, 655360, 65520, 65535, 655360, 65520, 65534, 655360, 65523, 65533, 655361, 65522, 65533, 655361, 65521, 65533, 655361, 65520, 65533, 655361, 65519, 65533, 655361, 65519, 65534, 655360, 65519, 65535, 655360, 65519, 0, 655360, 65519, 1, 655360, 65519, 2, 655361, 65520, 2, 655361, 65524, 65532, 655361, 65523, 65532, 655361, 65522, 65532, 655361, 65521, 65532, 655361, 65520, 65532, 655361, 65525, 65532, 655361, 65523, 2, 655361, 65522, 2, 655360, 65521, 2, 655360, 65519, 65532, 655361, 65525, 3, 655361, 65524, 3, 655361, 65523, 3, 655361, 65522, 3, 655361, 65521, 3, 655361, 65520, 3, 655361, 65519, 3, 655361, 65518, 3, 655361, 65518, 2, 655361, 65518, 1, 655361, 65518, 0, 655361, 65518, 65535, 655361, 65518, 65534, 655361, 65518, 65533, 655361, 65518, 65532, 655361, 65526, 3, 655361, 65526, 65532, 655361, 65517, 3, 655361, 65517, 2, 655361, 65517, 1, 655361, 65517, 0, 655361, 65517, 65535, 655361, 65517, 65534, 655361, 65517, 65533, 655361, 65517, 65532, 655361, 65522, 4, 655361, 65521, 4, 655361, 65521, 5, 655361, 65522, 5, 655361, 65522, 6, 655361, 65521, 6, 655361, 65521, 7, 655361, 65522, 7, 655361, 65524, 4, 655361, 65524, 5, 655361, 65524, 6, 655361, 65524, 7, 655361, 65523, 7, 655361, 65523, 6, 655361, 65523, 5, 655361, 65523, 4, 655361, 65520, 4, 655361, 65519, 4, 655361, 65518, 4, 655361, 65517, 4, 655361, 65518, 5, 655361, 65519, 5, 655361, 65520, 5, 655361, 65520, 6, 655361, 65520, 7, 655361, 65519, 7, 655361, 65519, 6, 655361, 65518, 6, 655361, 65517, 6, 655361, 65517, 5, 655361, 65518, 7, 655361, 65517, 7, 655361)
+}
+
+[node name="WallGrid" type="GridMap" parent="Environment" index="1"]
+mesh_library = ExtResource("2_srduu")
+cell_size = Vector3(4, 2, 4)
+data = {
+"cells": PackedInt32Array(2, 65533, 6, 1, 65533, 655363, 0, 65533, 655365, 65535, 65533, 655365, 65534, 65533, 655363, 2, 2, 1441798, 1, 2, 655363, 0, 2, 655365, 65535, 2, 655365, 65534, 2, 655363, 2, 65534, 1441796, 2, 65535, 1441796, 2, 0, 1441796, 2, 1, 1441796, 131074, 65535, 1441797, 131074, 0, 1441797, 131074, 1, 1441795, 131074, 65534, 1441795, 131073, 2, 655363, 131072, 2, 655363, 196607, 2, 655363, 196606, 2, 655363, 131073, 65533, 655363, 131072, 65533, 655363, 196607, 65533, 655363, 196606, 65533, 655363, 131074, 2, 1441798, 131074, 65533, 6, 65533, 65533, 655363, 65532, 65533, 655363, 65531, 65533, 655363, 65530, 65533, 655363, 65529, 65533, 655363, 65528, 65533, 655363, 65527, 65533, 655363, 65525, 65532, 655363, 65524, 65532, 655363, 65523, 65532, 655363, 65522, 65532, 655363, 65521, 65532, 655363, 65520, 65532, 655363, 65519, 65532, 655363, 65533, 2, 655363, 65532, 2, 655363, 65531, 2, 655363, 65530, 2, 655363, 65529, 2, 655363, 65528, 2, 655363, 65527, 2, 655363, 65526, 65533, 655366, 65526, 65532, 6, 65526, 2, 1048582, 65526, 3, 1441798, 65524, 3, 1048582, 65525, 3, 3, 65518, 65532, 3, 65523, 7, 3, 65522, 7, 3, 65521, 7, 3, 65520, 7, 3, 65519, 7, 3, 65518, 7, 3, 65517, 6, 1441795, 65517, 5, 1441795, 65517, 4, 1441795, 65517, 3, 1441795, 65517, 2, 1441795, 65517, 1, 1441795, 65517, 0, 1441795, 65517, 65535, 1441795, 65517, 65534, 1441795, 65517, 65533, 1441795, 65517, 65532, 1048582, 65517, 7, 655366, 65524, 7, 1441798, 65524, 6, 1441795, 65524, 5, 1441795, 65524, 4, 1441795, 196589, 6, 1441795, 196589, 5, 1441795, 196589, 4, 1441795, 196589, 3, 1441795, 196589, 2, 1441795, 196589, 1, 1441795, 196589, 0, 1441795, 196589, 65535, 1441795, 196589, 65534, 1441795, 196589, 65533, 1441795, 196590, 65532, 655363, 196591, 65532, 655363, 196592, 65532, 655363, 196593, 65532, 655363, 196594, 65532, 655363, 196595, 65532, 655363, 196596, 65532, 655363, 196597, 65532, 655363, 196605, 2, 655363, 196604, 2, 655363, 196603, 2, 655363, 196602, 2, 655363, 196601, 2, 655363, 196600, 2, 655363, 196599, 2, 655363, 196597, 3, 655363, 196595, 7, 655363, 196594, 7, 655363, 196593, 7, 655363, 196592, 7, 655363, 196591, 7, 655363, 196590, 7, 655363, 196598, 2, 1048582, 196598, 3, 1441798, 196596, 3, 1048582, 196596, 7, 1441798, 196589, 7, 655366, 196589, 65532, 1048582, 196598, 65532, 6, 196598, 65533, 655366, 196605, 65533, 655364, 196604, 65533, 655364, 196603, 65533, 655364, 196602, 65533, 655364, 196601, 65533, 655364, 196600, 65533, 655364, 196599, 65533, 655364, 196596, 6, 1048580, 196596, 5, 1048580, 196596, 4, 1048580)
+}
+metadata/_editor_floor_ = Vector3(0, 2, 0)
+
+[node name="Pillars" type="Node3D" parent="Environment" index="2"]
+
+[node name="pillar" parent="Environment/Pillars" index="0" instance=ExtResource("4_wyxho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 1, 10)
+
+[node name="pillar2" parent="Environment/Pillars" index="1" instance=ExtResource("4_wyxho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62, 1, 10)
+
+[node name="Tables" type="Node3D" parent="Environment" index="3"]
+
+[node name="table" parent="Environment/Tables" index="0" instance=ExtResource("5_q0ye3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -24, 1, 8)
+
+[node name="Stools" type="Node3D" parent="Environment" index="4"]
+
+[node name="stool" parent="Environment/Stools" index="0" instance=ExtResource("6_06kf8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 6)
+
+[node name="stool2" parent="Environment/Stools" index="1" instance=ExtResource("6_06kf8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1, 6)
+
+[node name="Torches" type="Node3D" parent="Environment" index="5"]
+
+[node name="torch" parent="Environment/Torches" index="0" instance=ExtResource("7_c7dwr")]
+transform = Transform3D(-0.998669, -0.0498632, 0.0131798, -0.0514674, 0.980029, -0.192079, -0.00333891, -0.192502, -0.981291, -50, 3.71173, 9.46698)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment/Torches/torch" index="1"]
+transform = Transform3D(1, -1.42027e-08, 1.02445e-08, -2.44472e-08, 1, -3.57628e-07, -2.32831e-09, 5.96046e-08, 1, -0.0198669, 0.4809, 0.314851)
+light_color = Color(1, 0.84123, 0.576537, 1)
+light_energy = 5.0
+
+[node name="torch2" parent="Environment/Torches" index="1" instance=ExtResource("7_c7dwr")]
+transform = Transform3D(-0.999608, -0.0231444, -0.0157767, -0.021788, 0.99645, -0.0813138, 0.0176027, -0.0809381, -0.996564, -61.9937, 3.71173, 9.48181)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Environment/Torches/torch2" index="1"]
+transform = Transform3D(0.99934, 0.0251023, -0.0262629, -0.0279008, 0.993285, -0.112279, 0.0232682, 0.112937, 0.993329, 0.0346146, 0.445255, 0.382183)
+light_color = Color(1, 0.84123, 0.576537, 1)
+light_energy = 5.0
+
+[node name="Doors" type="Node3D" parent="Environment" index="6"]
+
+[node name="Door" type="MeshInstance3D" parent="Environment/Doors" index="0"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -73.5747, 6.22388, -0.000363708)
+mesh = SubResource("BoxMesh_wyxho")
+skeleton = NodePath("../../..")
+
+[node name="Stairs" type="Node3D" parent="Environment" index="7"]
+
+[node name="stairs" parent="Environment/Stairs" index="0" instance=ExtResource("3_pbld3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -73.7521, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." index="5"]
+transform = Transform3D(0.0688685, 0, -0.997626, 0, 1, 0, 0.997626, 0, 0.0688685, -23.7748, 3.7676, 0)

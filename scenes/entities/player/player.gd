@@ -1,7 +1,8 @@
+# player.gd
 extends CharacterBody3D
 
 #jump
-@export var jump_height : float = 2.25
+@export var jump_height : float = 4.0
 @export var jump_time_to_peak : float = 0.4
 @export var jump_time_to_descent : float = 0.3
 
@@ -9,7 +10,7 @@ extends CharacterBody3D
 @onready var jump_gravity : float = (-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak) * -1.0
 @onready var fall_gravity : float = (-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent) * -1.0
 
-@export var base_speed := 4.0
+@export var base_speed := 4.5
 @export var run_speed := 8.0
 @export var defend_speed := 2.0
 var speed_modifier := 1.0
@@ -17,6 +18,10 @@ var speed_modifier := 1.0
 @onready var camera = $CameraController/Camera3D
 @onready var skin = $GodetteSkin
 @onready var ui = $UI
+
+# New combat variables
+var combat_mode := false
+var combat_orientation_speed := 10.0
 
 var movement_input := Vector2.ZERO
 var defend := false:
@@ -64,10 +69,11 @@ func _ready() -> void:
 	ui.setup(health)
 
 func _physics_process(delta: float) -> void:
-	
 	move_logic(delta)
 	jump_logic(delta)
 	ability_logic()
+	update_combat_orientation(delta)  # Add this line
+	
 	if Input.is_action_just_pressed("ui_accept"):
 		hit()
 	move_and_slide()
@@ -82,7 +88,7 @@ func move_logic(delta) -> void:
 		speed = defend_speed if defend else speed
 		var vel_2d = Vector2(velocity.x, velocity.z)
 		var target_vel = Vector2(movement_input.x * speed, movement_input.y * speed) * speed_modifier
-		vel_2d = vel_2d.lerp(target_vel, 0.5) # Adjust between .3-1.0 for snappier adjusting
+		vel_2d = vel_2d.lerp(target_vel, 0.8) # Adjust between .3-1.0 for snappier adjusting
 		velocity.x = vel_2d.x
 		velocity.z = vel_2d.y
 		# Update Animation
@@ -105,7 +111,7 @@ func jump_logic(delta) -> void:
 		if Input.is_action_just_pressed("jump") and stamina >= 20:
 			velocity.y = -jump_velocity
 			do_squash_and_stretch(1.2, 0.15)
-			stamina -= 20
+			#stamina -= 20
 	else:
 		skin.set_move_state('Jump')
 	# Constantly enforce gravity
@@ -135,6 +141,23 @@ func ability_logic() -> void:
 		current_spell = spells[spells.keys()[(int(current_spell) + 1) % len(spells)]]
 		ui.update_spell(spells, current_spell)
 
+# New function for combat orientation
+func update_combat_orientation(delta):
+	# Check if in combat mode (attacking or defending)
+	combat_mode = skin.attacking or defend
+	
+	if combat_mode:
+		# Get camera's forward direction (ignoring vertical component)
+		var camera_dir = -camera.global_transform.basis.z
+		camera_dir.y = 0  # Zero out vertical component
+		camera_dir = camera_dir.normalized()
+		
+		# Calculate the target angle based on camera direction
+		var target_angle = atan2(camera_dir.x, camera_dir.z)
+		
+		# Smoothly rotate the character to face camera direction
+		skin.rotation.y = rotate_toward(skin.rotation.y, target_angle, combat_orientation_speed * delta)
+
 func stop_movement(start_duration: float, end_duration: float):
 	var tween = create_tween()
 	tween.tween_property(self, "speed_modifier", 0.0, start_duration)
@@ -157,6 +180,15 @@ func shoot_magic(pos: Vector3) -> void:
 	if current_spell == spells.FIREBALL:
 		energy -= 20
 		cast_spell.emit("Fireball", pos, forward_direction, 1.0)
+		# Left fireball (rotated -15 degrees)
+		var left_angle = skin.rotation.y - deg_to_rad(10)
+		var left_direction = Vector2(sin(left_angle), cos(left_angle))
+		cast_spell.emit("Fireball", pos, left_direction, 1.0)
+		
+		# Right fireball (rotated +15 degrees)
+		var right_angle = skin.rotation.y + deg_to_rad(10)
+		var right_direction = Vector2(sin(right_angle), cos(right_angle))
+		cast_spell.emit("Fireball", pos, right_direction, 1.0)
 	if current_spell == spells.HEAL:
 		health += 1
 		energy -= 20
@@ -166,3 +198,7 @@ func _on_energy_recovery_timer_timeout() -> void:
 
 func _on_stamina_recovery_timer_timeout() -> void:
 	stamina += 1
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("exit_game"):
+		get_tree().quit()

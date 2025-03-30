@@ -3,7 +3,7 @@ extends Control
 @onready var heart_container = $Hearts/MarginContainer/HBoxContainer
 @onready var spell_texture = $Spells/MarginContainer/TextureRect
 @onready var energy_bar: TextureProgressBar = $EnergyBar/MarginContainer/TextureProgressBar
-@onready var stamina_bar: TextureProgressBar = $StaminaBar/CenterContainer/MarginContainer/TextureProgressBar
+@onready var stamina_bar: TextureProgressBar = $StaminaBar/MarginContainer/TextureProgressBar
 
 var heart_scene: PackedScene = preload("res://scenes/entities/player/heart.tscn")
 var heal_texture = preload("res://graphics/ui/heal.png")

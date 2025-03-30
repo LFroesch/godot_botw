@@ -19,8 +19,6 @@ shape = SubResource("CapsuleShape3D_1hmtu")
 [node name="CameraController" parent="." instance=ExtResource("2_635qg")]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.4, 0)
 spring_length = 7.0
-min_limit_x = -0.8
-max_limit_x = -0.2
 
 [node name="GodetteSkin" parent="." instance=ExtResource("3_58kc7")]
 
