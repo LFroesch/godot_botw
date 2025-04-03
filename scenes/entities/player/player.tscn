@@ -1,11 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtwnv0burnere"]
+[gd_scene load_steps=11 format=3 uid="uid://dtwnv0burnere"]
 
 [ext_resource type="Script" uid="uid://c7441eubpgrqh" path="res://scenes/entities/player/player.gd" id="1_1hmtu"]
 [ext_resource type="PackedScene" uid="uid://crw2brmuovf2g" path="res://scenes/entities/player/camera_controller.tscn" id="2_635qg"]
 [ext_resource type="PackedScene" uid="uid://b7jnlhave6pot" path="res://scenes/entities/player/godette_skin.tscn" id="3_58kc7"]
 [ext_resource type="PackedScene" uid="uid://qswf623t3dl2" path="res://scenes/entities/player/ui.tscn" id="4_nh4ur"]
+[ext_resource type="AudioStream" uid="uid://q016xqptbrb" path="res://audio/steps.mp3" id="5_8akj5"]
+[ext_resource type="AudioStream" uid="uid://brog30lvnpr6b" path="res://audio/sword sound.wav" id="6_bj7e2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1hmtu"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nh4ur"]
+emission_shape = 1
+emission_sphere_radius = 0.6
+gravity = Vector3(0, 1, 0)
+scale_min = 0.05
+scale_max = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjvvg"]
+albedo_color = Color(0.698039, 0.698039, 0.698039, 1)
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8akj5"]
+material = SubResource("StandardMaterial3D_bjvvg")
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
@@ -37,6 +53,22 @@ autostart = true
 [node name="StaminaRecoveryTimer" type="Timer" parent="Timers"]
 wait_time = 0.15
 autostart = true
+
+[node name="RunParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.191859)
+transparency = 0.25
+cast_shadow = 0
+process_material = SubResource("ParticleProcessMaterial_nh4ur")
+draw_pass_1 = SubResource("SphereMesh_8akj5")
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="StepsSound" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("5_8akj5")
+
+[node name="SwordSound" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("6_bj7e2")
+volume_db = -5.0
 
 [connection signal="timeout" from="Timers/EnergyRecoveryTimer" to="." method="_on_energy_recovery_timer_timeout"]
 [connection signal="timeout" from="Timers/StaminaRecoveryTimer" to="." method="_on_stamina_recovery_timer_timeout"]

@@ -1,11 +1,13 @@
-[gd_scene load_steps=35 format=3 uid="uid://dfjl3me7le7ew"]
+[gd_scene load_steps=54 format=3 uid="uid://dfjl3me7le7ew"]
 
 [ext_resource type="PackedScene" uid="uid://casuq5kyqnbwt" path="res://scenes/levels/level.tscn" id="1_fl1qg"]
+[ext_resource type="Script" uid="uid://cavepdjsn0xd2" path="res://scenes/levels/overworld.gd" id="2_k5d7r"]
 [ext_resource type="PackedScene" uid="uid://dei3k505mtc41" path="res://scenes/levels/overworld_skin.tscn" id="2_l7h5l"]
 [ext_resource type="PackedScene" uid="uid://defd80nyuanxo" path="res://graphics/environment/objects/barrel.glb" id="2_tbicr"]
 [ext_resource type="PackedScene" uid="uid://wmbsoi1t5ylt" path="res://scenes/entities/enemies/skeleton_mage.tscn" id="2_uhu12"]
 [ext_resource type="PackedScene" uid="uid://ddsvnkbeyypbu" path="res://graphics/environment/objects/tree2.glb" id="3_c3d33"]
 [ext_resource type="PackedScene" uid="uid://xf4k70n2j544" path="res://scenes/entities/enemies/skeleton_warrior.tscn" id="3_n0hg8"]
+[ext_resource type="PackedScene" uid="uid://bmcdjbn3bx76c" path="res://scenes/entities/other/bird.tscn" id="4_5vv60"]
 [ext_resource type="PackedScene" uid="uid://1dqpuol41mwr" path="res://scenes/levels/bridge.tscn" id="5_ftdat"]
 [ext_resource type="PackedScene" uid="uid://busa8h5c44075" path="res://graphics/environment/objects/platoon.glb" id="5_hh5uf"]
 [ext_resource type="PackedScene" uid="uid://cha1fejd104yc" path="res://scenes/levels/castle.tscn" id="6_id15u"]
@@ -28,6 +30,18 @@
 [ext_resource type="PackedScene" uid="uid://cw8b2woh0hlrx" path="res://graphics/environment/objects/rocks3.glb" id="26_ms2oj"]
 [ext_resource type="PackedScene" uid="uid://b7fri258q6w5x" path="res://graphics/environment/objects/rocks4.glb" id="27_ms2oj"]
 [ext_resource type="PackedScene" uid="uid://lforr8lmeko6" path="res://graphics/environment/objects/rock5.glb" id="28_5vv60"]
+[ext_resource type="PackedScene" uid="uid://b7iesn273fw6k" path="res://scenes/levels/water.tscn" id="31_v6xm7"]
+[ext_resource type="Script" uid="uid://bpcvpfx2y6jcp" path="res://addons/proton_scatter/src/scatter.gd" id="32_nfnk8"]
+[ext_resource type="Script" uid="uid://6002spo70fte" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="33_nlkbu"]
+[ext_resource type="Script" uid="uid://lnpetdl036g1" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="34_ysyxr"]
+[ext_resource type="Script" uid="uid://cloncnqidefjg" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="35_y2yut"]
+[ext_resource type="Script" uid="uid://cc2o2bgabneot" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="36_0882p"]
+[ext_resource type="Script" uid="uid://cue03hkn852xn" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="37_ausg6"]
+[ext_resource type="Script" uid="uid://dtp0lspf2jlvu" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="38_nfp3b"]
+[ext_resource type="Script" uid="uid://d1v83l28uh1q8" path="res://addons/proton_scatter/src/scatter_item.gd" id="39_whk71"]
+[ext_resource type="Script" uid="uid://djiuo30wewl8n" path="res://addons/proton_scatter/src/scatter_shape.gd" id="40_r111s"]
+[ext_resource type="Script" uid="uid://c6hoyuv07ah81" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="41_b80c1"]
+[ext_resource type="AudioStream" uid="uid://cvq05fj2rym4b" path="res://audio/stream.mp3" id="42_nfnk8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ms2oj"]
 sky_top_color = Color(0.210154, 0.674419, 0.886954, 1)
@@ -60,19 +74,72 @@ adjustment_contrast = 0.9
 [sub_resource type="Curve3D" id="Curve3D_ms2oj"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -60.5696, 0, 33.8419, 0, 0, 0, 0, 0, 0, -133.641, 0, 111.48, 0, 0, 0, 0, 0, 0, -39.2571, 0, 196.73, 0, 0, 0, 0, 0, 0, 59.6933, 0, 140.404, 0, 0, 0, 0, 0, 0, 84.0504, 0, 42.9758),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -60.5696, 0, 33.8419, -1.98692, 5.57642, -46.78, 1.98692, -5.57642, 46.78, -133.641, 0, 111.48, -73.9729, 0.351563, 1.21422, 73.9729, -0.351563, -1.21422, -47.2706, -2.23425, 322.192, -27.843, -2.8396, 25.4491, 27.843, 2.8396, -25.4491, 165.355, 0, 241.727, 31.5549, -5.35327, 43.1391, -31.5549, 5.35327, -43.1391, 84.0504, 0, 42.9758),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3d33"]
-albedo_color = Color(0.165527, 0.36166, 0.882813, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_v6xm7"]
+size = Vector3(4.5, 2, 5.5)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ftdat"]
-material = SubResource("StandardMaterial3D_c3d33")
-size = Vector2(600, 250)
+[sub_resource type="Resource" id="Resource_nfnk8"]
+script = ExtResource("35_y2yut")
+amount = 500
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_nlkbu"]
+script = ExtResource("36_0882p")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(20, 360, 20)
+scale = Vector3(0.5, 0.5, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_ysyxr"]
+script = ExtResource("37_ausg6")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_y2yut"]
+script = ExtResource("38_nfp3b")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_0882p"]
+script = ExtResource("33_nlkbu")
+stack = Array[ExtResource("34_ysyxr")]([SubResource("Resource_nfnk8"), SubResource("Resource_nlkbu"), SubResource("Resource_ysyxr"), SubResource("Resource_y2yut")])
+
+[sub_resource type="Resource" id="Resource_g8bsm"]
+script = ExtResource("41_b80c1")
+radius = 3.04297
 
 [node name="Overworld" instance=ExtResource("1_fl1qg")]
+script = ExtResource("2_k5d7r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
 environment = SubResource("Environment_k5d7r")
@@ -85,7 +152,7 @@ shadow_enabled = true
 shadow_opacity = 0.6
 
 [node name="Player" parent="Entities" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08652, 12.572, -82.8365)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40481, 12.5596, -85.2122)
 
 [node name="SkeletonMage" parent="Entities" index="1" instance=ExtResource("2_uhu12")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6583, -32.8069, 110.337)
@@ -175,15 +242,16 @@ transform = Transform3D(-0.0482919, 0, -0.998833, 0, 1, 0, 0.998833, 0, -0.04829
 transform = Transform3D(-0.0243275, 0, -0.999704, 0, 1, 0, 0.999704, 0, -0.0243275, 161.618, -33.3623, 95.4899)
 
 [node name="Path3D" type="Path3D" parent="Entities" index="30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.9853, 0)
 curve = SubResource("Curve3D_ms2oj")
+
+[node name="Bird" parent="Entities/Path3D" index="0" instance=ExtResource("4_5vv60")]
+transform = Transform3D(0.728199, 0, -0.685362, 0, 0.999996, 0, 0.685362, 0, 0.728198, -60.5696, 0, 33.8419)
+use_model_front = true
 
 [node name="overworld_environment" parent="Environment" index="0" instance=ExtResource("2_l7h5l")]
 
-[node name="Water" type="MeshInstance3D" parent="Environment" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50.571, 242.642)
-mesh = SubResource("PlaneMesh_ftdat")
-
-[node name="Bridges" type="Node3D" parent="Environment" index="2"]
+[node name="Bridges" type="Node3D" parent="Environment" index="1"]
 
 [node name="bridge" parent="Environment/Bridges" index="0" instance=ExtResource("5_ftdat")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -47, -49, 267)
@@ -197,12 +265,20 @@ transform = Transform3D(0.32636, 0, -0.945246, 0, 1, 0, 0.945246, 0, 0.32636, -1
 [node name="platoon2" parent="Environment/Bridges" index="3" instance=ExtResource("5_hh5uf")]
 transform = Transform3D(-0.492393, 0, 0.870373, 0, 1, 0, -0.870373, 0, -0.492393, -123.75, -48.6127, 272.45)
 
-[node name="Castle" type="Node3D" parent="Environment" index="3"]
+[node name="Castle" type="Node3D" parent="Environment" index="2"]
 
 [node name="castle2" parent="Environment/Castle" index="0" instance=ExtResource("6_id15u")]
 transform = Transform3D(0.812897, 0, 0.582407, 0, 1, 0, -0.582407, 0, 0.812897, -111.276, -43.5188, 343.601)
 
-[node name="Barrels" type="Node3D" parent="Environment" index="4"]
+[node name="castlearea" type="Area3D" parent="Environment/Castle/castle2" index="8"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Castle/castle2/castlearea" index="0"]
+transform = Transform3D(0.951013, 0, 0.30915, 0, 1, 0, -0.30915, 0, 0.951013, 3.95496, 7.51538, -7.22427)
+shape = SubResource("BoxShape3D_v6xm7")
+
+[node name="Barrels" type="Node3D" parent="Environment" index="3"]
 
 [node name="barrel" parent="Environment/Barrels" index="0" instance=ExtResource("2_tbicr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44834, 12.6282, -69.116)
@@ -225,7 +301,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.996, -11.5661, -21.0043)
 [node name="barrel6" parent="Environment/Barrels" index="6" instance=ExtResource("2_tbicr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.918, -13.6283, -19.029)
 
-[node name="Trees" type="Node3D" parent="Environment" index="5"]
+[node name="Trees" type="Node3D" parent="Environment" index="4"]
 
 [node name="tree2" parent="Environment/Trees" index="0" instance=ExtResource("3_c3d33")]
 transform = Transform3D(-0.877615, 0, -0.479366, 0, 1, 0, 0.479366, 0, -0.877615, -17.5234, 12.8784, -82.6252)
@@ -1793,7 +1869,7 @@ transform = Transform3D(0.285889, 0, -0.958263, 0, 1, 0, 0.958263, 0, 0.285889, 
 [node name="tree107" parent="Environment/Trees" index="521" instance=ExtResource("8_n8jux")]
 transform = Transform3D(-0.663574, 0, -0.748111, 0, 1, 0, 0.748111, 0, -0.663574, 169.467, -44.4112, 147.492)
 
-[node name="Camps" type="Node3D" parent="Environment" index="6"]
+[node name="Camps" type="Node3D" parent="Environment" index="5"]
 
 [node name="camp" parent="Environment/Camps" index="0" instance=ExtResource("9_61nx7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6629, -32.9172, 109.439)
@@ -1870,7 +1946,7 @@ transform = Transform3D(0.184397, 0, -0.982852, 0, 1, 0, 0.982852, 0, 0.184397, 
 [node name="camp4" parent="Environment/Camps" index="24" instance=ExtResource("9_61nx7")]
 transform = Transform3D(-0.987066, 0, -0.160312, 0, 1, 0, 0.160312, 0, -0.987066, -137.913, 11.0076, -23.1655)
 
-[node name="Fences" type="Node3D" parent="Environment" index="7"]
+[node name="Fences" type="Node3D" parent="Environment" index="6"]
 
 [node name="fence_post" parent="Environment/Fences" index="0" instance=ExtResource("10_w7e7j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9283, 13.3913, -75.6467)
@@ -1947,7 +2023,7 @@ transform = Transform3D(0.760599, 0, -0.649222, 0, 1, 0, 0.649222, 0, 0.760599, 
 [node name="fence_middle4" parent="Environment/Fences" index="24" instance=ExtResource("11_v6rrw")]
 transform = Transform3D(0.835539, 0, -0.549431, 0, 1, 0, 0.549431, 0, 0.835539, 18.1647, 13.3281, -88.8034)
 
-[node name="Campfire" type="Node3D" parent="Environment" index="8"]
+[node name="Campfire" type="Node3D" parent="Environment" index="7"]
 
 [node name="campfire" parent="Environment/Campfire" index="0" instance=ExtResource("12_usmjs")]
 transform = Transform3D(0.9967, 0, 0.0811731, 0, 1, 0, -0.0811731, 0, 0.9967, 1.83554, 12.8791, -76.5462)
@@ -1958,7 +2034,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87.8386, -32.5423, 149.815)
 [node name="target" parent="Environment/Campfire" index="2" instance=ExtResource("17_v6rrw")]
 transform = Transform3D(-0.0408751, 0.137202, -0.989699, 0.00566171, 0.990543, 0.137086, 0.999148, -1.52415e-09, -0.0412654, -11.4569, 13.7571, -77.7895)
 
-[node name="Lantern" type="Node3D" parent="Environment" index="9"]
+[node name="Lantern" type="Node3D" parent="Environment" index="8"]
 
 [node name="lantern" parent="Environment/Lantern" index="0" instance=ExtResource("13_g6jrr")]
 transform = Transform3D(0.995704, 0, -0.0925965, 0, 1, 0, 0.0925965, 0, 0.995704, 9.81436, 12.7984, -71.3917)
@@ -1972,7 +2048,7 @@ transform = Transform3D(-0.0277122, 0, -0.999616, 0, 1, 0, 0.999616, 0, -0.02771
 [node name="lantern2" parent="Environment/Lantern" index="3" instance=ExtResource("13_g6jrr")]
 transform = Transform3D(-0.999912, 0, -0.0132641, 0, 1, 0, 0.0132641, 0, -0.999912, 14.9001, 12.7699, -75.6807)
 
-[node name="Rocks" type="Node3D" parent="Environment" index="10"]
+[node name="Rocks" type="Node3D" parent="Environment" index="9"]
 
 [node name="rocks1" parent="Environment/Rocks" index="0" instance=ExtResource("24_xahul")]
 transform = Transform3D(-0.0349748, 0, 1.99969, 0, 2, 0, -1.99969, 0, -0.0349748, 77.2495, -33.2501, 82.292)
@@ -1995,7 +2071,7 @@ transform = Transform3D(-0.115388, 0, -0.99332, 0, 1, 0, 0.99332, 0, -0.115388, 
 [node name="rock5" parent="Environment/Rocks" index="6" instance=ExtResource("28_5vv60")]
 transform = Transform3D(-0.289433, 0, -0.957198, 0, 1, 0, 0.957198, 0, -0.289433, -179.442, -62.0848, 234.784)
 
-[node name="Logs" type="Node3D" parent="Environment" index="11"]
+[node name="Logs" type="Node3D" parent="Environment" index="10"]
 
 [node name="log" parent="Environment/Logs" index="0" instance=ExtResource("20_g6jrr")]
 transform = Transform3D(0.0454153, 0, -0.998968, 0, 1, 0, 0.998968, 0, 0.0454153, -1.09614, 12.95, -76.585)
@@ -2015,7 +2091,7 @@ transform = Transform3D(0.695975, 0, -0.718066, 0, 1, 0, 0.718066, 0, 0.695975, 
 [node name="log6" parent="Environment/Logs" index="5" instance=ExtResource("20_g6jrr")]
 transform = Transform3D(-0.78469, 0, -0.619889, 0, 1, 0, 0.619889, 0, -0.78469, -85.0894, -32.521, 153.164)
 
-[node name="Shrine" type="Node3D" parent="Environment" index="12"]
+[node name="Shrine" type="Node3D" parent="Environment" index="11"]
 
 [node name="shrine" parent="Environment/Shrine" index="0" instance=ExtResource("14_hh5uf")]
 transform = Transform3D(-0.568491, 0, 0.822691, 0, 1, 0, -0.822691, 0, -0.568491, -10.8911, 13.4672, -71.8224)
@@ -2023,7 +2099,7 @@ transform = Transform3D(-0.568491, 0, 0.822691, 0, 1, 0, -0.822691, 0, -0.568491
 [node name="shrine2" parent="Environment/Shrine" index="1" instance=ExtResource("14_hh5uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.6186, -32.1082, 158.701)
 
-[node name="Chests" type="Node3D" parent="Environment" index="13"]
+[node name="Chests" type="Node3D" parent="Environment" index="12"]
 transform = Transform3D(0.847539, 0, 0.530733, 0, 1, 0, -0.530733, 0, 0.847539, -10.3169, -32.9783, 112.098)
 
 [node name="chest" parent="Environment/Chests" index="0" instance=ExtResource("22_vnvtj")]
@@ -2032,10 +2108,77 @@ transform = Transform3D(-0.112596, 0, 0.993641, 0, 1, 0, -0.993641, 0, -0.112596
 [node name="chest2" parent="Environment/Chests" index="1" instance=ExtResource("22_vnvtj")]
 transform = Transform3D(0.997785, 0, 0.0665179, 0, 1, 0, -0.0665179, 0, 0.997785, -84.4345, 0.144527, 0.49427)
 
-[node name="Crates" type="Node3D" parent="Environment" index="14"]
+[node name="Crates" type="Node3D" parent="Environment" index="13"]
 
 [node name="crates2" parent="Environment/Crates" index="0" instance=ExtResource("15_md8tm")]
 transform = Transform3D(0.572089, 0, -0.820192, 0, 1, 0, 0.820192, 0, 0.572089, 70.4249, 2.35053, -61.9461)
 
 [node name="crates" parent="Environment/Crates" index="1" instance=ExtResource("15_md8tm")]
 transform = Transform3D(0.847539, 0, 0.530733, 0, 1, 0, -0.530733, 0, 0.847539, -10.3169, -32.9783, 112.098)
+
+[node name="Grass" type="Node3D" parent="Environment" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50.719, 277.117)
+
+[node name="ProtonScatter" type="Node3D" parent="Environment/Grass" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3195, 64.0481, -352.098)
+script = ExtResource("32_nfnk8")
+modifier_stack = SubResource("Resource_0882p")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://bpcvpfx2y6jcp"
+
+[node name="ScatterItem" type="Node3D" parent="Environment/Grass/ProtonScatter" index="0"]
+script = ExtResource("39_whk71")
+path = "uid://ctnneq32xs6o8"
+
+[node name="ScatterShape" type="Node3D" parent="Environment/Grass/ProtonScatter" index="1"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("40_r111s")
+shape = SubResource("Resource_g8bsm")
+
+[node name="Water" parent="Environment" index="15" instance=ExtResource("31_v6xm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50.719, 277.117)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Environment/Water" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8335, 7.28724, -15.5849)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Environment/Water" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.1858, 7.28724, -24.3923)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Environment/Water" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155.213, 7.28724, -45.9197)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Environment/Water" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -232.884, 7.28724, -41.9588)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Environment/Water" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.5348, 7.28724, -25.5738)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Environment/Water" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.408, 7.28724, -67.2365)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Environment/Water" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.163, 7.28724, -121.156)
+stream = ExtResource("42_nfnk8")
+autoplay = true
+max_distance = 50.0
+
+[connection signal="body_entered" from="Environment/Castle/castle2/castlearea" to="." method="_on_castlearea_body_entered"]

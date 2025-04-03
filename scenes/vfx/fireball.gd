@@ -32,6 +32,7 @@ func _on_timer_timeout() -> void:
 	queue_free()
 
 func setup(size: float) -> void:
+	$FireballMesh.rotation.y = -(direction.angle() + PI/2) + PI 
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector3.ONE * size, 0.5)
 	hover_height = base_hover_height * size

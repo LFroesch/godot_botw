@@ -70,3 +70,9 @@ func _on_blink_timer_timeout() -> void:
 
 func can_damage(value: bool):
 	$Rig/Skeleton3D/RightHandSlot/sword.can_damage = value
+
+func death_animation() -> void:
+	extra_animation.animation = "Death_A"
+	$AnimationTree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	$AnimationTree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	attacking = false

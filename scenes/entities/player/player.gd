@@ -1,7 +1,6 @@
 # player.gd
 extends CharacterBody3D
 
-#jump
 @export var jump_height : float = 4.0
 @export var jump_time_to_peak : float = 0.4
 @export var jump_time_to_descent : float = 0.3
@@ -18,6 +17,7 @@ var speed_modifier := 1.0
 @onready var camera = $CameraController/Camera3D
 @onready var skin = $GodetteSkin
 @onready var ui = $UI
+@onready var run_particles: GPUParticles3D = $RunParticles
 
 # New combat variables
 var combat_mode := false
@@ -44,7 +44,13 @@ var health = 5:
 		ui.update_health(value, value - health)
 		health = value
 		if health <= 0:
-			get_tree().quit()
+			# Disable player controls
+			set_physics_process(false)
+			skin.death_animation()
+			# Wait for animation to finish
+			var level = get_parent().get_parent() # Assuming player -> Entities -> Level
+			if level.has_method("switch_level"):
+				level.switch_level('overworld', Vector3(-0.158185, 12.54015, -86.60701))
 var energy = 100:
 	set(value):
 		energy = min(100, value)
@@ -69,6 +75,7 @@ func _ready() -> void:
 	ui.setup(health)
 
 func _physics_process(delta: float) -> void:
+	RenderingServer.global_shader_parameter_set("player_position", global_position)
 	move_logic(delta)
 	jump_logic(delta)
 	ability_logic()
@@ -77,6 +84,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		hit()
 	move_and_slide()
+	physics_logic()
+	
 
 func move_logic(delta) -> void:
 	movement_input = Input.get_vector("left", "right", "forward", "backward").rotated(-camera.global_rotation.y)
@@ -96,6 +105,7 @@ func move_logic(delta) -> void:
 		# Update Facing Direction
 		var target_angle = -movement_input.angle() + PI/2
 		skin.rotation.y = rotate_toward(skin.rotation.y, target_angle, 6.0 * delta)
+		print(position)
 	else:
 		# Logic for Idle / Return to Idle
 		var vel_2d = Vector2(velocity.x, velocity.z)
@@ -104,6 +114,8 @@ func move_logic(delta) -> void:
 		velocity.z = vel_2d.y
 		# Update Animation
 		skin.set_move_state('Idle')
+	
+	run_particles.emitting = is_on_floor() and is_running and movement_input != Vector2.ZERO
 
 func jump_logic(delta) -> void:
 	# Check if on floor and jump button pressed
@@ -123,6 +135,7 @@ func ability_logic() -> void:
 	if Input.is_action_just_pressed("ability"):
 		if weapon_active:
 			skin.attack()
+			$Sounds/SwordSound.play()
 		else:
 			if energy >= 20:
 				skin.cast_spell()
@@ -202,3 +215,10 @@ func _on_stamina_recovery_timer_timeout() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit_game"):
 		get_tree().quit()
+
+func physics_logic() -> void:
+	for i in get_slide_collision_count():
+		var collider = get_slide_collision(i).get_collider()
+		if collider is RigidBody3D:
+			var damping = 0.7
+			collider.apply_central_impulse(-get_slide_collision(i).get_normal() * damping)
