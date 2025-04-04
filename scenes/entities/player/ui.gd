@@ -1,3 +1,4 @@
+#ui.gd
 extends Control
 
 @onready var heart_container = $Hearts/MarginContainer/HBoxContainer

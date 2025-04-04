@@ -116,6 +116,13 @@ func move_logic(delta) -> void:
 		skin.set_move_state('Idle')
 	
 	run_particles.emitting = is_on_floor() and is_running and movement_input != Vector2.ZERO
+	
+	# Steps Sound Logic (Disabled because I don't like the sound)
+	#if is_on_floor() and movement_input:
+	#	if not $Sounds/StepsSound.playing:
+	#		$Sounds/StepsSound.playing = true
+	#else:
+	#	$Sounds/StepsSound.playing = false
 
 func jump_logic(delta) -> void:
 	# Check if on floor and jump button pressed
@@ -135,7 +142,6 @@ func ability_logic() -> void:
 	if Input.is_action_just_pressed("ability"):
 		if weapon_active:
 			skin.attack()
-			$Sounds/SwordSound.play()
 		else:
 			if energy >= 20:
 				skin.cast_spell()
@@ -212,9 +218,9 @@ func _on_energy_recovery_timer_timeout() -> void:
 func _on_stamina_recovery_timer_timeout() -> void:
 	stamina += 1
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("exit_game"):
-		get_tree().quit()
+#func _input(event: InputEvent) -> void:
+#	if event.is_action_pressed("exit_game"):
+#		get_tree().quit()
 
 func physics_logic() -> void:
 	for i in get_slide_collision_count():

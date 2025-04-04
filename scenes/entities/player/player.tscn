@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b7jnlhave6pot" path="res://scenes/entities/player/godette_skin.tscn" id="3_58kc7"]
 [ext_resource type="PackedScene" uid="uid://qswf623t3dl2" path="res://scenes/entities/player/ui.tscn" id="4_nh4ur"]
 [ext_resource type="AudioStream" uid="uid://q016xqptbrb" path="res://audio/steps.mp3" id="5_8akj5"]
-[ext_resource type="AudioStream" uid="uid://brog30lvnpr6b" path="res://audio/sword sound.wav" id="6_bj7e2"]
+[ext_resource type="AudioStream" uid="uid://17kv14klbm8a" path="res://audio/sword sound2.wav" id="6_8akj5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1hmtu"]
 
@@ -65,10 +65,10 @@ draw_pass_1 = SubResource("SphereMesh_8akj5")
 
 [node name="StepsSound" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("5_8akj5")
+volume_db = -20.0
 
 [node name="SwordSound" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("6_bj7e2")
-volume_db = -5.0
+stream = ExtResource("6_8akj5")
 
 [connection signal="timeout" from="Timers/EnergyRecoveryTimer" to="." method="_on_energy_recovery_timer_timeout"]
 [connection signal="timeout" from="Timers/StaminaRecoveryTimer" to="." method="_on_stamina_recovery_timer_timeout"]

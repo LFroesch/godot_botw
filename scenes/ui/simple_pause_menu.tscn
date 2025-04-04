@@ -1,0 +1,169 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwxg0u4xbsfga"]
+
+[ext_resource type="Script" uid="uid://cbj6ihv82mix7" path="res://scenes/ui/simple_pause_menu.gd" id="1_cy1m6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ys6we"]
+bg_color = Color(0.141176, 0.141176, 0.196078, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="SimplePauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_cy1m6")
+
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -125.0
+offset_right = 200.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ys6we")
+
+[node name="Label" type="Label" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 20.0
+offset_right = 81.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vbox" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -15.0
+offset_right = 150.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/Panel/Vbox"]
+layout_mode = 2
+text = "Resume Game"
+
+[node name="SettingsButton" type="Button" parent="PauseMenu/Panel/Vbox"]
+layout_mode = 2
+text = "Settings"
+
+[node name="UnstuckButton" type="Button" parent="PauseMenu/Panel/Vbox"]
+layout_mode = 2
+text = "Unstuck"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/Panel/Vbox"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="SettingsMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="Panel" type="Panel" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -125.0
+offset_right = 200.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ys6we")
+
+[node name="Label" type="Label" parent="SettingsMenu/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 20.0
+offset_right = 81.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="SettingsMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -15.0
+offset_right = 150.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings will be implemented later."
+
+[node name="BackButton" type="Button" parent="SettingsMenu/Panel"]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 145.0
+offset_right = 350.0
+offset_bottom = 176.0
+text = "Back"
+
+[connection signal="pressed" from="PauseMenu/Panel/Vbox/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/Vbox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/Vbox/UnstuckButton" to="." method="_on_unstuck_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/Vbox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SettingsMenu/Panel/BackButton" to="." method="_on_back_button_pressed"]

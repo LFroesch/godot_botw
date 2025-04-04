@@ -1,5 +1,8 @@
+#level.gd
 class_name Level
 extends Node3D
+
+var pause_menu_scene: PackedScene = preload("res://scenes/ui/simple_pause_menu.tscn")
 
 var fade_rect: ColorRect
 var fireball_scene: PackedScene	= preload("res://scenes/vfx/fireball.tscn")
@@ -11,6 +14,8 @@ const scenes = {
 static var next_position: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
+	var pause_menu = pause_menu_scene.instantiate()
+	add_child(pause_menu)
 	var canvas_layer = CanvasLayer.new()
 	add_child(canvas_layer)
 	

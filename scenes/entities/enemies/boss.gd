@@ -40,17 +40,17 @@ func spin_attack_animation() -> void:
 	spinning = true
 	can_damage_toggle = true
 	# max duration
-#	var max_spin_duration = rng.randf_range(3.0, 5.0)
-#	get_tree().create_timer(max_spin_duration).timeout.connect(func():
-#		if spinning:  # Only proceed if still spinning
-#			var max_spin_tween = create_tween()
-#			max_spin_tween.tween_property(self, "speed", walk_speed, 0.5)
-#			max_spin_tween.tween_method(_spin_transition, 1.0, 0.0, 0.3)
-#			spinning = false
-#			can_damage_toggle = false
-#			if position.distance_to(player.position) < notice_radius:
-#				$Timers/AttackTimer.start()
-#	)
+	var max_spin_duration = rng.randf_range(3.0, 8.0)
+	get_tree().create_timer(max_spin_duration).timeout.connect(func():
+		if spinning:  # Only proceed if still spinning
+			var max_spin_tween = create_tween()
+			max_spin_tween.tween_property(self, "speed", walk_speed, 0.5)
+			max_spin_tween.tween_method(_spin_transition, 1.0, 0.0, 0.3)
+			spinning = false
+			can_damage_toggle = false
+			if position.distance_to(player.position) < notice_radius:
+				$Timers/AttackTimer.start()
+	)
 	
 func _spin_transition(value: float) -> void:
 	$AnimationTree.set("parameters/SpinBlend/blend_amount", value)

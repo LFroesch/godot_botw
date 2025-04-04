@@ -50,13 +50,6 @@ func _input(event: InputEvent) -> void:
 		
 		# Clamp vertical target rotation
 		target_rotation.x = clamp(target_rotation.x, min_limit_x, max_limit_x)
-	
-	# Toggle mouse capture with ESC key
-	if event.is_action_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # Apply smoothed rotation for mouse input
 func apply_smoothed_rotation(delta: float):

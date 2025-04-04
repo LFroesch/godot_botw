@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://casuq5kyqnbwt"]
+[gd_scene load_steps=4 format=3 uid="uid://casuq5kyqnbwt"]
 
 [ext_resource type="PackedScene" uid="uid://dtwnv0burnere" path="res://scenes/entities/player/player.tscn" id="1_377w7"]
 [ext_resource type="Script" uid="uid://dxk78vyenwoip" path="res://scenes/levels/level.gd" id="1_urvlt"]
+[ext_resource type="AudioStream" uid="uid://cm8ncbpf8wgf0" path="res://audio/music.ogg" id="3_b2cq8"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_urvlt")
@@ -14,3 +15,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6682, 0.25, 15.2371)
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Projectiles" type="Node3D" parent="."]
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_b2cq8")

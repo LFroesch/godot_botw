@@ -25,7 +25,9 @@ func attack() -> void:
 	if not attacking:
 		attack_state_machine.travel('Slice' if $SecondAttackTimer.time_left else 'Chop')
 		$AnimationTree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	 
+		var timer = get_tree().create_timer(0.5)  # Adjust time to match the wind-up
+		timer.timeout.connect(func(): get_parent().get_node("Sounds/SwordSound").play())
+		
 func attack_toggle(value: bool):
 	attacking = value
 
