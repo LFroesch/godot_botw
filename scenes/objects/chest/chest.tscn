@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3lx2318mdn75"]
+
+[ext_resource type="PackedScene" uid="uid://d2pglgy0w12pg" path="res://graphics/environment/objects/chest.glb" id="1_yv7tv"]
+
+[node name="Chest" type="Node3D"]
+
+[node name="chest" parent="." instance=ExtResource("1_yv7tv")]
+transform = Transform3D(0.862417, 0, -0.506199, 0, 1, 0, 0.506199, 0, 0.862417, 0, 0, 0)
+
+[editable path="chest"]

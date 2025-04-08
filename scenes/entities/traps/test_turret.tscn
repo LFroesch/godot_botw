@@ -120,7 +120,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17368, 1.0164, 0)
 target_position = Vector3(3, 0, 0)
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 6.0
 autostart = true
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
