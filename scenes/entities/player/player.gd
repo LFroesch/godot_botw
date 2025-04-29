@@ -50,7 +50,15 @@ var health = 5:
 			# Wait for animation to finish
 			var level = get_parent().get_parent() # Assuming player -> Entities -> Level
 			if level.has_method("switch_level"):
-				level.switch_level('overworld', Vector3(-0.158185, 12.54015, -86.60701))
+				match level.level_id:
+					"overworld":
+						level.switch_level('overworld', Vector3(-0.158185, 12.54015, -86.60701))
+					"dungeon":
+						level.switch_level('dungeon', Vector3(-68.12434, 1.050913, 0.010175))
+					"colloseum":
+						level.switch_level('colloseum', Vector3(-2, 0, -50))
+					_: # Default case
+						level.switch_level('overworld', Vector3(-0.158185, 12.54015, -86.60701))
 var energy = 100:
 	set(value):
 		energy = min(100, value)

@@ -1,6 +1,7 @@
 #level.gd
 class_name Level
 extends Node3D
+var level_id = "unknown"
 
 var pause_menu_scene: PackedScene = preload("res://scenes/ui/simple_pause_menu.tscn")
 
@@ -8,7 +9,8 @@ var fade_rect: ColorRect
 var fireball_scene: PackedScene	= preload("res://scenes/vfx/fireball.tscn")
 const scenes = {
 	'dungeon': "res://scenes/levels/dungeon.tscn",
-	'overworld': "res://scenes/levels/overworld.tscn"
+	'overworld': "res://scenes/levels/overworld.tscn",
+	'colloseum': "res://scenes/levels/colloseum.tscn"
 }
 # Static variable to store where we're going
 static var next_position: Vector3 = Vector3.ZERO
@@ -16,9 +18,9 @@ static var next_position: Vector3 = Vector3.ZERO
 func _ready() -> void:
 	var pause_menu = pause_menu_scene.instantiate()
 	add_child(pause_menu)
+	
 	var canvas_layer = CanvasLayer.new()
 	add_child(canvas_layer)
-	
 	fade_rect = ColorRect.new()
 	fade_rect.color = Color(0, 0, 0, 0) # Start transparent
 	fade_rect.anchor_right = 1.0

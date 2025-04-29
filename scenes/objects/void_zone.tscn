@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvrmkoqhae1ft"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0ye3"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_06kf8"]
+size = Vector3(400, 20, 400)
+
+[node name="VoidZone" type="CSGBox3D"]
+visible = false
+use_collision = true
+size = Vector3(400, 2, 400)
+material = SubResource("StandardMaterial3D_q0ye3")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_06kf8")
